@@ -22,3 +22,23 @@ cd <repository-name>
 npm i
 npm run dev
 ```
+
+## Static SPA build (Vite + React Router)
+
+The app is a client-only Vite + React single-page app — no SSR or server entry.
+
+```sh
+npm run dev      # local dev server
+npm run build    # static output in dist/
+npm run preview  # serve dist/ locally
+```
+
+Routes (`src/routes/index.ts`): `/`, `/signin`, `/signup`, and `/app` (behind the
+client-side auth guard in `src/routes/_authenticated/route.tsx`, which redirects to `/signin`).
+
+Environment variables read in the browser: `VITE_SUPABASE_URL`, `VITE_SUPABASE_PUBLISHABLE_KEY`.
+
+### Deploying to Vercel
+
+`vercel.json` builds with `npm run build`, serves `dist/`, and rewrites every path to
+`/index.html` so deep links such as `/app` resolve client-side.
