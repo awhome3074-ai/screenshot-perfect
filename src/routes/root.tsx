@@ -3,7 +3,6 @@ import { Link, Outlet, useRevalidator, useRouteError } from "react-router";
 import { useEffect, useRef } from "react";
 
 import { supabase } from "@/integrations/supabase/client";
-import { reportLovableError } from "../lib/lovable-error-reporting";
 
 export function NotFound() {
   return (
@@ -30,9 +29,8 @@ export function NotFound() {
 export function RootErrorBoundary() {
   const error = useRouteError();
   const revalidator = useRevalidator();
-  console.error(error);
   useEffect(() => {
-    reportLovableError(error, { boundary: "react_router_root_error_boundary" });
+    console.error(error);
   }, [error]);
 
   return (

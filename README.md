@@ -2,23 +2,13 @@
 
 Implement exactly the screenshot and nothing else
 
-This project was built with [Lovable](https://lovable.dev).
-
-## Build with Lovable
-
-Continue developing this project in the [Lovable editor](https://lovable.dev/projects/8f6efab4-f9ac-4ead-b57e-5a337ac6c701).
-
-- **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: every change made in Lovable is committed straight to this repository.
-- **Full ownership**: this code is yours. Push to `main` on GitHub and your changes sync back into Lovable, ready for your next prompt.
-
 ## Development
 
-Prefer working locally? You need Node.js and npm — [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating).
+You need Node.js and npm.
 
 ```sh
-git clone <this-repository-url>
-cd <repository-name>
+git clone https://github.com/awhome3074-ai/screenshot-perfect.git
+cd screenshot-perfect
 npm i
 npm run dev
 ```
@@ -36,7 +26,18 @@ npm run preview  # serve dist/ locally
 Routes (`src/routes/index.ts`): `/`, `/signin`, `/signup`, and `/app` (behind the
 client-side auth guard in `src/routes/_authenticated/route.tsx`, which redirects to `/signin`).
 
-Environment variables read in the browser: `VITE_SUPABASE_URL`, `VITE_SUPABASE_PUBLISHABLE_KEY`.
+### Supabase
+
+Auth runs on the project's own Supabase project. The browser reads two variables
+(see `.env`):
+
+| Variable | Value |
+| --- | --- |
+| `VITE_SUPABASE_URL` | `https://<project-ref>.supabase.co` |
+| `VITE_SUPABASE_PUBLISHABLE_KEY` | the project's `sb_publishable_…` key (replaces the old anon key) |
+
+Set the same two variables in Vercel → Project → Settings → Environment Variables,
+then redeploy, because Vite inlines them at build time.
 
 ### Deploying to Vercel
 
